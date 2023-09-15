@@ -520,13 +520,13 @@ export function Settings() {
   const updateConfig = config.update;
 
   const updateStore = useUpdateStore();
-  const [checkingUpdate, setCheckingUpdate] = useState(false);
-  const currentVersion = updateStore.formatVersion(updateStore.version);
+  const [checkingUpdate, setCheckingUpdate] = useState(false); 
+  const currentVersion = updateStore.formatVersion(updateStore.version); 
   const remoteId = updateStore.formatVersion(updateStore.remoteVersion);
   const hasNewVersion = currentVersion !== remoteId;
-  const updateUrl = getClientConfig()?.isApp ? RELEASE_URL : UPDATE_URL;
-
-  function checkUpdate(force = false) {
+  // const updateUrl = getClientConfig()?.isApp ? RELEASE_URL : UPDATE_URL;  
+  const updateUrl =  UPDATE_URL
+  function checkUpdate(force = false) { 
     setCheckingUpdate(true);
     updateStore.getLatestVersion(force).then(() => {
       setCheckingUpdate(false);
@@ -566,7 +566,7 @@ export function Settings() {
 
   const showUsage = accessStore.isAuthorized();
   useEffect(() => {
-    // checks per minutes
+    // checks per minutes 
     checkUpdate();
     showUsage && checkUsage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -578,7 +578,7 @@ export function Settings() {
         navigate(Path.Home);
       }
     };
-    document.addEventListener("keydown", keydownEvent);
+    document.addEventListener("keydown", keydownEvent); 
     return () => {
       document.removeEventListener("keydown", keydownEvent);
     };
